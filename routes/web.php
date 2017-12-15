@@ -13,7 +13,11 @@
 
 Auth::routes();
 
-Route::get('/', [
+Route::get('/', function () {
+    return Redirect::route('app.home');
+});
+
+Route::get('/home', [
     'name' => 'Home',
     'as' => 'app.home',
     'uses' => 'HomeController@home',
@@ -53,4 +57,22 @@ Route::post('/webhook/paypal/{order?}/{env?}', [
     'name' => 'PayPal Express IPN',
     'as' => 'webhook.paypal.ipn',
     'uses' => 'PayPalController@webhook',
+]);
+
+Route::get('/login/verifiy', [
+    'name' => 'Verifiy Login',
+    'as' => 'auth.verifiy.login',
+    'uses' => 'Auth\LoginController@showVerifyForm',
+]);
+
+Route::post('/login/verifiy', [
+    'name' => 'Verifiy Login',
+    'as' => 'auth.verifiy.login',
+    'uses' => 'Auth\LoginController@verifiy',
+]);
+
+Route::post('/login/resend/verification', [
+    'name' => 'Resend Verification Email',
+    'as' => 'auth.resend.verifiy.email',
+    'uses' => 'Auth\LoginController@resend',
 ]);

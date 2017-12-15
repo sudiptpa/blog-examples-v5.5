@@ -55,4 +55,14 @@ class LoginController extends Controller
             'password' => $request->password,
         ];
     }
+
+    /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showVerifyForm()
+    {
+        return view('auth.verify');
+    }
 }
