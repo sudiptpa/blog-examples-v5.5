@@ -23,6 +23,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                <h1>{{ $title }}</h1>
+                <hr>
                 @foreach($blogs as $post)
                     <div class="post__preview">
                         <div class="post__content">
