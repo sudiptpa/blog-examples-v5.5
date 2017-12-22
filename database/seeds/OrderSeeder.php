@@ -12,6 +12,8 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
+        Order::truncate();
+
         foreach (range(1, 20) as $key => $each) {
             Order::create([
                 'transaction_id' => null,
