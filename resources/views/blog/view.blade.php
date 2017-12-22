@@ -27,9 +27,12 @@
                     <div class="post__content">
                         <header>
                             <span>{{ $blog->created_at->format('F, d Y') }}</span>
+                            <p>
+                                <h2>{{ $blog->title }}</h2>
+                            </p>
                         </header>
-                        <h2>{{ $blog->name }}</h2>
-                        <div class="content__holder">{{ $blog->content }}</div>
+                        <div class="blog__excerpt">{{ $blog->excerpt }}</div>
+                        <div class="blog__content">{{ $blog->content }}</div>
                         <hr>
                         <div class="facebook__like">
                             <div class="fb-like" data-href="{{ route('app.blog.view', ['slug' => $blog->slug]) }}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
