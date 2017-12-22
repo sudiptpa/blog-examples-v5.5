@@ -76,3 +76,14 @@ Route::post('/login/resend/verification', [
     'as' => 'auth.resend.verifiy.email',
     'uses' => 'Auth\LoginController@resend',
 ]);
+
+Route::group(['prefix' => 'blog'], function () {
+    Route::get('/', [
+        'as' => 'app.blog',
+        'uses' => 'BlogController@index',
+    ]);
+    Route::get('/{slug}', [
+        'as' => 'app.blog.view',
+        'uses' => 'BlogController@view',
+    ]);
+});
