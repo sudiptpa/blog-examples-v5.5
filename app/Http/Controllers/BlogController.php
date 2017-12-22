@@ -40,11 +40,6 @@ class BlogController extends Controller
                 'description' => 'A blog website to share tutorials and tips !',
                 'keywords' => 'A Laravel Blog, Tips, Tutorials',
             ],
-            'meta' => [
-                'title' => 'Blogs',
-                'description' => 'A blog website to share tutorials and tips !',
-                'keywords' => 'A Laravel Blog, Tips, Tutorials',
-            ],
         ]);
     }
 
@@ -64,11 +59,6 @@ class BlogController extends Controller
                 'image' => asset('assets/preview.jpeg'),
                 'url' => $this->request->url(),
                 'description' => $blog->excerpt,
-            ],
-            'meta' => [
-                'title' => 'Blogs',
-                'description' => $blog->excerpt,
-                'keywords' => 'A Laravel Blog, Tips, Tutorials',
             ],
         ]);
     }
