@@ -14,7 +14,7 @@ class BlogController extends Controller
     /**
      * @var int
      */
-    protected $paginate = 10;
+    protected $paginate = 2;
 
     /**
      * @param Request $request

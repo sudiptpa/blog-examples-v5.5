@@ -30,6 +30,9 @@
                         <div class="post__content">
                             <header>
                                 <span>{{ $post->created_at->format('F, d Y') }}</span>
+                                <p>
+                                    <h2>{{ $post->title }}</h2>
+                                </p>
                             </header>
                             <a href="{{ route('app.blog.view', ['slug' => $post->slug]) }}">
                                 <h2>{{ $post->name }}</h2>
