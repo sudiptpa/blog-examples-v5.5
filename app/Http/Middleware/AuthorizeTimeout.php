@@ -33,7 +33,9 @@ class AuthorizeTimeout
 
                 $request->session()->invalidate();
 
-                return redirect('/');
+                return redirect('/')->with([
+                    'status' => 'You are logged out of system, please follow the link we sent before 15 minutes to authorize your device, the link will be valid with same IP for 24hrs.',
+                ]);
             }
         }
 

@@ -35,7 +35,7 @@ class AuthorizeController extends Controller
     {
         if (Authorize::validateToken($token)) {
             return Redirect::route('dashboard')->with([
-                'success' => 'Awesome ! you are now authorized !',
+                'status' => 'Awesome ! you are now authorized !',
             ]);
         }
 
