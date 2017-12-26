@@ -84,3 +84,14 @@ Route::post('/webhook/paypal/{order?}/{env?}', [
     'as' => 'webhook.paypal.ipn',
     'uses' => 'PayPalController@webhook',
 ]);
+
+Route::group(['prefix' => 'blog'], function () {
+    Route::get('/', [
+        'as' => 'app.blog',
+        'uses' => 'BlogController@index',
+    ]);
+    Route::get('/{slug}', [
+        'as' => 'app.blog.view',
+        'uses' => 'BlogController@view',
+    ]);
+});
