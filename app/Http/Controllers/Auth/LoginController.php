@@ -5,7 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
+/**
+ * Class LoginController
+ * @package App\Http\Controllers\Auth
+ */
 class LoginController extends Controller
 {
     /*
@@ -26,7 +31,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -35,6 +40,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('authorize')->only('login');
         $this->middleware('guest')->except('logout');
     }
 
@@ -46,23 +52,13 @@ class LoginController extends Controller
      */
     protected function credentials(Request $request)
     {
-        $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL)
-            ? $this->username()
-            : 'username';
+        $email = $this->username();
+
+        $field = filter_var($request->get($email), FILTER_VALIDATE_EMAIL) ? $email : 'username';
 
         return [
-            $field => $request->get($this->username()),
+            $field => $request->get($email),
             'password' => $request->password,
         ];
-    }
-
-    /**
-     * Show the application's login form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showVerifyForm()
-    {
-        return view('auth.verify');
     }
 }
