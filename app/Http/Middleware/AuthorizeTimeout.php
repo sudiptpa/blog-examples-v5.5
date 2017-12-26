@@ -3,15 +3,13 @@
 namespace App\Http\Middleware;
 
 use App\Authorize;
-use App\Mail\AuthorizeDevice as AuthorizeMail;
 use Closure;
-use Illuminate\Support\Facades\Mail;
 
 /**
- * Class AuthorizeDevice
+ * Class AuthorizeTimeout
  * @package App\Http\Middleware
  */
-class AuthorizeDevice
+class AuthorizeTimeout
 {
     /**
      * @var \App\Authorize
@@ -30,13 +28,6 @@ class AuthorizeDevice
         if (Authorize::inactive() && auth()->check()) {
             $this->authorize = Authorize::make();
 
-            if ($this->authorize->noAttempt()) {
-                Mail::to($request->user())
-                    ->send(new AuthorizeMail($this->authorize));
-
-                $this->authorize->increment('attempt');
-            }
-
             if ($this->timeout()) {
                 auth()->guard()->logout();
 
@@ -44,8 +35,6 @@ class AuthorizeDevice
 
                 return redirect('/');
             }
-
-            return response()->view('auth.authorize');
         }
 
         return $next($request);
