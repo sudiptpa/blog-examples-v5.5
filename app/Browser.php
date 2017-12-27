@@ -3,8 +3,33 @@
 namespace App;
 
 /**
+ * File: Browser.php
+ * Author: Chris Schuld (http://chrisschuld.com/)
+ * Last Modified: July 22nd, 2016
+ * @version 2.0
+ * @package PegasusPHP
+ *
+ * Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld.com)
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details at:
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * User Agents Sampled from: http://www.useragentstring.com/
+ *
+ * This implementation is based on the original work from Gary White
+ * http://apptools.com/phptools/browser/
+ *
  * Class Browser
  * @package App
+ * @link https://github.com/cbschuld/Browser.php
  */
 class Browser
 {
