@@ -81,8 +81,9 @@
                     <a href="{{ route('order.paypal') }}">PayPal Integration</a>
                     <a href="{{ route('loan.calculator') }}">Loan Calculator</a>
                     <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="{{ route('auth.verifiy.login') }}">Authorize Device</a>
-                    <a href="{{ route('app.blog') }}">Blog</a>
+                    @if(Auth::check())
+                        <a href="{{ url('/dashboard') }}">Dashboard</a>
+                    @endif
                 </div>
             </div>
         </div>

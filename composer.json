@@ -11,6 +11,7 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "omnipay/paypal": "^2.6",
+        "sudiptpa/geoip": "^1.0",
         "sudiptpa/guid": "^1.0",
         "sudiptpa/paypal-ipn": "^2.0",
         "symfony/event-dispatcher": "^2.8"
