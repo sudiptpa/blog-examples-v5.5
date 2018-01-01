@@ -20,6 +20,13 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group">
+                                @if (Request::has('previous'))
+                                    <input type="hidden" name="previous" value="{{ Request::get('previous') }}">
+                                @else
+                                    <input type="hidden" name="previous" value="{{ URL::previous() }}">
+                                @endif
+                            </div>
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label for="password" class="col-md-4 control-label">Password</label>
                                 <div class="col-md-6">

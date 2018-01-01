@@ -36,12 +36,13 @@ class LoginController extends Controller
     /**
      * Create a new controller instance.
      *
+     * @param Request $request
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
-        $this->middleware('authorize')->only('login');
         $this->middleware('guest')->except('logout');
+        $this->request = $request;
     }
 
     /**
@@ -60,5 +61,17 @@ class LoginController extends Controller
             $field => $request->get($email),
             'password' => $request->password,
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function redirectTo()
+    {
+        if ($this->request->has('previous')) {
+            $this->redirectTo = $this->request->get('previous');
+        }
+
+        return $this->redirectTo ?? '/home';
     }
 }
