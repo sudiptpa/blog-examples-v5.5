@@ -12,7 +12,7 @@ return [
     | default location for this type of information, allowing packages
     | to have a conventional place to find your various credentials.
     |
-    */
+     */
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
@@ -35,4 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook_poster' => [
+        'app_id' => env('FACEBOOK_APP_ID'),
+        'app_secret' => env('FACEBOOK_APP_SECRET'),
+        'access_token' => env('FACEBOOK_ACCESS_TOKEN'),
+    ],
 ];
