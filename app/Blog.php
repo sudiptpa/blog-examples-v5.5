@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class Blog
@@ -11,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Blog extends Model
 {
+    use Notifiable;
+
     /**
      * @var string
      */
@@ -41,5 +44,10 @@ class Blog extends Model
     public function setPublishedAtAttribute($date)
     {
         $this->attributes['published_at'] = Carbon::parse($date);
+    }
+
+    public function getLink()
+    {
+        return route('app.blog.view', $this->slug);
     }
 }
