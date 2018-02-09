@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Domain;
 use Closure;
-use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class PreferredDomain
@@ -20,11 +20,10 @@ class PreferredDomain
      */
     public function handle($request, Closure $next)
     {
-        if (starts_with($request->header('host'), 'www.')) {
-            $host = str_replace('www.', '', $request->header('host'));
-            $request->headers->set('host', $host);
+        $domain = new Domain($request);
 
-            return Redirect::to($request->fullUrl());
+        if ($domain->diff()) {
+            return redirect()->to($domain->translated(), 301);
         }
 
         return $next($request);
