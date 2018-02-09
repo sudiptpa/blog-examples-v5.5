@@ -4,7 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\PayPal;
+use App\PayPalIPN;
 use Illuminate\Http\Request;
+use PayPal\IPN\Event\IPNInvalid;
+use PayPal\IPN\Event\IPNVerificationFailure;
+use PayPal\IPN\Event\IPNVerified;
+use PayPal\IPN\Listener\Http\ArrayListener;
+use App\Repositories\IPNRepository;
 
 /**
  * Class PayPalController
@@ -12,6 +18,46 @@ use Illuminate\Http\Request;
  */
 class PayPalController extends Controller
 {
+    /**
+     * @param IPNRepository $repository
+     */
+    public function __construct(IPNRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
+     * @param $order_id
+     * @param $env
+     * @param Request $request
+     */
+    public function webhook($order_id, $env, Request $request)
+    {
+        $listener = new ArrayListener;
+
+        if ($env == 'sandbox') {
+            $listener->useSandbox();
+        }
+
+        $listener->setData($request->all());
+
+        $listener = $listener->run();
+
+        $listener->onInvalid(function (IPNInvalid $event) use ($order_id) {
+            $this->repository->handle($event, PayPalIPN::IPN_INVALID, $order_id);
+        });
+
+        $listener->onVerified(function (IPNVerified $event) use ($order_id) {
+            $this->repository->handle($event, PayPalIPN::IPN_VERIFIED, $order_id);
+        });
+
+        $listener->onVerificationFailure(function (IPNVerificationFailure $event) use ($order_id) {
+            $this->repository->handle($event, PayPalIPN::IPN_FAILURE, $order_id);
+        });
+
+        $listener->listen();
+    }
+
     /**
      * @param Request $request
      */
