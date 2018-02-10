@@ -42,16 +42,6 @@ class Order extends Model
     }
 
     /**
-     * @param Builder $query
-     * @param $order_id
-     * @return mixed
-     */
-    public function scopeFindById($query, $order_id)
-    {
-        return $query->where('id', $order_id);
-    }
-
-    /**
      * Payment completed.
      *
      * @return boolean

@@ -29,7 +29,7 @@ class IPNRepository
         $object = $event->getMessage();
 
         if (is_numeric($order_id)) {
-            $order = Order::findById($order_id)->first();
+            $order = Order::find($order_id);
         }
 
         if (empty($order)) {

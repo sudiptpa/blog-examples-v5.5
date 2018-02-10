@@ -32,7 +32,7 @@ class PayPalIPN extends Model
     /**
      * @var array
      */
-    protected $fillable = ['order_id', 'verified', 'transaction_id', 'payment_status', 'attempt', 'request_method', 'request_url', 'request_headers', 'payload'];
+    protected $fillable = ['order_id', 'verified', 'transaction_id', 'payment_status', 'request_method', 'request_url', 'request_headers', 'payload'];
 
     /**
      * @var string
